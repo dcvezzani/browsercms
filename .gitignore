@@ -24,3 +24,5 @@ test/dummy/.sass-cache
 test/dummy/config/database.yml
 .sass-cache
 db/backups
+bin
+.*.sw*
