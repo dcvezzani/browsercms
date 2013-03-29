@@ -1,0 +1,9 @@
+require File.expand_path('./test/support/factory_helpers')
+require File.expand_path('./test/support/database_helpers')
+require File.expand_path('./test/factories/factories')
+require File.expand_path('./test/factories/attachable_factories')
+require File.expand_path('./test/mock_file.rb')
+
+include FactoryGirl::Syntax::Methods
+include FactoryHelpers
+

@@ -32,3 +32,8 @@ group :test do
   gem 'ruby-prof'
   gem 'aruba'
 end
+
+group :test, :development do
+  gem 'debugger'
+end
+
