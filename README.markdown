@@ -27,6 +27,11 @@ Here's a quick overview of some of the more notable features:
 ## Getting Started
 See the [Getting Started](https://github.com/browsermedia/browsercms/wiki/Getting-Started) guide for instructions on how to install and start a project with BrowserCMS.  If you have a Rails project already, you may consider simply [adding BrowserCms to your project](https://github.com/browsermedia/browsercms/wiki/Adding-BrowserCMS-to-an-existing-Rails-project) instead.
 
+## Cloning the Branch
+At this time, do not use master to develop enhancements for BrowserCms.  Please use the '3.5.x' branch.
+
+    git clone -b 3.5.x git@github.com:dcvezzani/browsercms.git
+
 ## Configuring the Test Environment
 To get the tests to pass (for this fork, at least), you will need to configure your RVM to include two gemsets.  Assume you have already installed BrowserCms, you want to add some enhancements to the BrowserCms project and you are currently in the browsercms fork (the directory being labeled 'browsercms').
 
