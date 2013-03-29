@@ -27,6 +27,11 @@ Here's a quick overview of some of the more notable features:
 ## Getting Started
 See the [Getting Started](https://github.com/browsermedia/browsercms/wiki/Getting-Started) guide for instructions on how to install and start a project with BrowserCMS.  If you have a Rails project already, you may consider simply [adding BrowserCms to your project](https://github.com/browsermedia/browsercms/wiki/Adding-BrowserCMS-to-an-existing-Rails-project) instead.
 
+## Why did I fork?
+First, I want to use BrowserCms to provide some core functionality for a client's web application.  It has more advanced database functionality and is beyond the scope of simply using a WordPress site.  I wanted to use Ruby on Rails and I wanted to have some rich features built in from the get go.  BrowserCms doesn't have everything, but I feel it's one of the more complete RoR Cms tools available.
+
+I will be documenting my journey through BrowserCms in the blog, [Mighty Metal Grapes](http://mighty-metal-grapes.blogspot.com/).
+
 ## Cloning the Branch
 At this time, do not use master to develop enhancements for BrowserCms.  Please use the '3.5.x' branch.
 
