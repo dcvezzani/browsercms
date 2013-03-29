@@ -9,13 +9,13 @@ require 'bundler/setup'
 
 load Gem.bin_path('browsercms', 'bcms-upgrade')
 
-require 'rubygems'
-require 'thor'
-require 'term/ansicolor'
-require 'rails/generators/actions'
-require 'active_support/core_ext/string/inflections'
-require 'cms/commands/actions'
-require 'cms/version'
+# require 'rubygems'
+# require 'thor'
+# require 'term/ansicolor'
+# require 'rails/generators/actions'
+# require 'active_support/core_ext/string/inflections'
+# require 'cms/commands/actions'
+# require 'cms/version'
 
 class String
   include Term::ANSIColor
