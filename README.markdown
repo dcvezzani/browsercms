@@ -25,7 +25,49 @@ Here's a quick overview of some of the more notable features:
 * CMSify your Rails App: BrowserCMS can be added to existing Rails applications to add content management capabilities.
 
 ## Getting Started
-See the [Getting Started](https://github.com/browsermedia/browsercms/wiki/Getting-Started) guide for instructions on how to install and start a project with BrowserCMS.
+See the [Getting Started](https://github.com/browsermedia/browsercms/wiki/Getting-Started) guide for instructions on how to install and start a project with BrowserCMS.  If you have a Rails project already, you may consider simply [adding BrowserCms to your project](https://github.com/browsermedia/browsercms/wiki/Adding-BrowserCMS-to-an-existing-Rails-project) instead.
+
+## Configuring the Test Environment
+To get the tests to pass (for this fork, at least), you will need to configure your RVM to include two gemsets.  Assume you have already installed BrowserCms, you want to add some enhancements to the BrowserCms project and you are currently in the browsercms fork (the directory being labeled 'browsercms').
+
+    # install if it's not already there
+    rvm use ruby-1.9.3-p327
+
+    rvm gemset create rails309
+    rvm gemset create rails310
+
+    rvm gemset use rails309
+    gem install --version "3.0.9" rails
+
+    rvm gemset use rails310
+    gem install --version "3.1.0" rails
+
+    # this should restore the configured gemset for the browsercms project
+    cd ../browsercms
+
+If development efforts are taking place, it's more convenient if we can work with an unpacked browsercms gem that we don't have to 'gem install' over and over again.  This, however, has the drawback that we can't take advantage of rvm gemsets to ensure that we are using the correct ./bin executable, no matter where we are on our development system.  One way this can be handled is by generating Bundler binstubs and telling our tests where to find them.
+
+    bundle install --binstubs
+
+The Cucumber tests use Aruba to test command line calls (CLI).  They are the only tests that will be making calls to bcms.  The Cucumber configuration (features/support/env.rb) takes care of this for us.  If binstubs are there, they will be used (e.g., ./bin/bcms); if not, calls to bcms will be handled by RVM which will not adequately test BrowserCms and the enhancements being worked on in the fork.
+
+### Running the Tests
+Once the configuration is in place, the tests can be run.  Assuming testing will be done using sqlite3 (which is how the Gemfile is currently configured),...
+
+    # run tests on browsercms proper (for the first time)
+    ./bin/rake ci:test
+
+    # run tests on browsercms proper for subsequent times
+    ./bin/rake test
+
+    # run all cucumber tests
+    ./bin/cucumber
+
+    # run a single cucumber test
+    ./bin/cucumber -r features features/commands/generate_module.feature
+
+    # checkout other testing options
+    ./bin/rake --tasks
 
 ## License
 BrowserCMS is released under a LGPL license, and is copyright 1998-2013 BrowserMedia. The complete copyright can be found in COPYRIGHT.txt, and copy of the license can be found in LICENSE.txt.
