@@ -9,8 +9,8 @@ Given /^I am working on a BrowserCMS v3.1.x module named "([^"]*)"$/ do |project
 end
 
 Given /^I am working on a BrowserCMS v3.3.x module named "([^"]*)"/ do |project_name|
-  run_simple "rails _3.0.9_ new #{project_name} --skip-bundle"
-  cd project_name
+  create_historical_cms_project(project_name, "3.0.9", "3.3.3")
+
   append_to_file "config/database.yml", "# @original-yml"
   append_to_file "config/routes.rb", "# @original-routes"
   append_to_file "#{project_name}.gemspec", "# @original-gemspec"

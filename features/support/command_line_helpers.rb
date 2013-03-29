@@ -34,12 +34,24 @@ module CommandLineHelpers
   # Create a baseline rails project that looks like BrowserCMS as of a particular version
   #   This will not be particularly 'robust' since its not really possible to run a command to get a historical version of the cms.
   def create_historical_cms_project(project_name, rails_version, cms_version)
-    run_simple "rails _#{rails_version}_ new #{project_name} --skip-bundle"
+
+    # remember the current gemset being used
+    # if the .rvmrc was accepted when cd'ing into browsercms, you should have
+    # already been prompted to use the specified version of Ruby
+    res = `rvm gemset list`
+    current_gemset = res.match(/^=> ([^\s]+)/)[1]
+
+    # switch to the gemset that has been configured with the specified version of Rails
+    run_simple "rvm gemset use rails#{rails_version.gsub(/\./, '')}"
+    run_simple "rails new #{project_name} --skip-bundle"
     cd project_name
     append_to_file "Gemfile", "gem \"browsercms\", \"#{cms_version}\""
     self.project_name = project_name
-  end
 
+    # return back to the previous gemset
+    run_simple "rvm gemset use #{current_gemset}"
+  end
+  
   # Given the name of the migration (i.e. create_something.rb) find the EXACT migration file (which will include a timestamp)
   #   Example:
   #   find_migration_with_name("create_something.rb")
