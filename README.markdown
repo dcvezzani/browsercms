@@ -40,6 +40,7 @@ At this time, do not use master to develop enhancements for BrowserCms.  Please 
 ## Problems?
 As I encountered problems of my own in getting BrowserCms started up, I have found the following useful:
 
+* [Setup BrowserCms for local development](https://github.com/dcvezzani/browsercms/wiki/Setup-BrowserCms-for-local-development)
 * [Configuring the Test Environment](https://github.com/dcvezzani/browsercms/wiki/Configuring-the-Test-Environment)
 
 ## License
@@ -53,3 +54,4 @@ The user documentation and guides for this version of the application can be fou
 3. [Report a Bug!](https://github.com/browsermedia/browsercms/issues)
 4. [Discuss the Project](http://groups.google.com/group/browsercms)
 5. [BrowserCMS Site](http://browsercms.org)
+
