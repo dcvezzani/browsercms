@@ -25,6 +25,7 @@ Before do
   # @gemfile_bin_path = "../../browsercms/bin"
 
   # Generating projects takes a while, so give Aruba more time before it cuts things off.
+  # TODO: use tagged options as shown in features/support/long_scenarios.rb
   @aruba_timeout_seconds = 180
 
   # Must explicitly clean up the working directory before each project (might be solved in later version of Aruba)
