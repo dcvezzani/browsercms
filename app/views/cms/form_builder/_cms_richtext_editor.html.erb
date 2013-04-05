@@ -1,0 +1,37 @@
+<% tds = Time.now.strftime("%H%M%S") %>
+<% id_with_tds = "#{id}_#{tds}" %>
+
+<%= content_for :html_head do %>
+  <%= javascript_tag do %>
+    jQuery(function($) { setup_select_box_<%= id_with_tds %>(); })
+  <% end %>
+<% end %>
+
+<%= javascript_tag do %>
+  console.log("setup_text_edit_<%= id_with_tds %>");
+
+  function setup_text_edit_<%= id_with_tds %>(){
+    loadEditor('<%= id_with_tds %>');
+    enableEditor('<%= id_with_tds %>');
+  }
+
+  function setup_select_box_<%= id_with_tds %>(){
+    $('select.<%= object_name %>_<%= method %>_dhtml_selector').selectbox({width: '96px', dhtml_selector: '<%= object_name %>_<%= method %>'});
+    }
+
+  //jQuery(document).bind("partial-load", function($) { console.log("loaded setup_select_box_<%= id_with_tds %>"); setup_text_edit_<%= id_with_tds %>(); })
+  setTimeout(function(){ console.log("loaded setup_select_box_<%= id_with_tds %>"); setup_text_edit_<%= id_with_tds %>(); }, 50);
+<% end %>
+
+<div class="fields text_editor_fields">
+  <% if cms_options[:label] %>
+    <%= f.label method, cms_options[:label] %>
+  <% else %>
+    <%= f.label method %>
+  <% end %>
+  <%# drop_down_tag :dhtml_selector, options_for_select([["Rich Text", ""],["Simple Text", "disabled"]], cookies[:editorEnabled] == 'true' ? "" : "disabled"), :class => "#{object_name}_#{method}_dhtml_selector", :onchange => "toggleEditor('#{id_with_tds}', this)" %>
+  <div class="editor">
+    <%= f.text_editor method, options.merge({id: id_with_tds}) %>
+  </div>
+  <%= f.cms_instructions cms_options[:instructions] %>
+</div>

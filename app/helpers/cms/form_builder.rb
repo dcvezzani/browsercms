@@ -132,6 +132,18 @@ class Cms::FormBuilder < ActionView::Helpers::FormBuilder
                             :options => options, :cms_options => cms_options
   end
 
+  # Renders a WYWIWYG rich text editor.
+  def cms_richtext_editor(method, options = {})
+    add_tabindex!(options)
+    set_default_value!(method, options)
+    cms_options = options.extract_only!(:label, :instructions, :default_value)
+    render_cms_form_partial :richtext_editor,
+                            :id => (options[:id] || "#{@object_name}_#{method}"),
+                            :editor_enabled => (cookies["editorEnabled"].blank? ? true : (cookies["editorEnabled"] == 'true' || cookies["editorEnabled"] == ['true'])),
+                            :object_name => @object_name, :method => method,
+                            :options => options, :cms_options => cms_options
+  end
+
   # Renders instructions for a given field below the field itself. Instructions can be used to provide helpful
   # guidance to content editors including formatting help or just explaining what a field is for.
   #
