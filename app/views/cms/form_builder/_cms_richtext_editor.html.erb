@@ -7,11 +7,14 @@
   <% end %>
 <% end %>
 
+<% ck_narrow_editor ||= true %>
 <%= javascript_tag do %>
   console.log("setup_text_edit_<%= id_with_tds %>");
 
   function setup_text_edit_<%= id_with_tds %>(){
-    loadEditor('<%= id_with_tds %>');
+    var cke_options = ("<%= ck_narrow_editor %>" == "true") ? {height: 75, width: 498} : {}
+
+    loadEditor('<%= id_with_tds %>', cke_options );
     enableEditor('<%= id_with_tds %>');
   }
 

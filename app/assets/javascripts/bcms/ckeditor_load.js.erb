@@ -38,10 +38,15 @@ function toggleEditor(id, status) {
     }
 }
 
-function loadEditor(id) {
+function loadEditor(id, cke_options) {
+    if(typeof(cke_options) == "undefined"){
+        cke_options = {};
+    }
+
     if (typeof(CKEDITOR) != "undefined") {
         if (CKEDITOR.instances[id] == null) {
-            CKEDITOR.replace(id, { customConfig:'<%= asset_path(Rails.application.config.cms.ckeditor.configuration_file) %>' });
+            var options = $.extend({ customConfig:'<%= asset_path(Rails.application.config.cms.ckeditor.configuration_file) %>' }, cke_options);
+            CKEDITOR.replace(id, options);
         }
         $.cookie('editorEnabled', true, { expires:90, path:'/' });
         return true;
