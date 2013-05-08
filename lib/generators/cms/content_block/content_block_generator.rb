@@ -85,10 +85,13 @@ module Cms
       end
 
       def namespaced_controller_name
-        unless namespaced?
-          "cms/#{@controller_name}"
-        else
+        if namespaced?
           @controller_name
+        elsif ENV['NAMESPACE']
+          @controller_name
+          #ENV['NAMESPACE']
+        else
+          "cms/#{@controller_name}"
         end
       end
 
@@ -100,10 +103,14 @@ module Cms
       def cms_or_class_path
         if namespaced?
           class_path
+        elsif ENV['NAMESPACE']
+          [ENV['NAMESPACE']]
         else
           ["cms"]
         end
       end
+
     end
   end
 end
+
