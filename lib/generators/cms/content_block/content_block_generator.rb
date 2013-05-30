@@ -92,6 +92,7 @@ module Cms
           #ENV['NAMESPACE']
         else
           "cms/#{@controller_name}"
+          #@controller_name
         end
       end
 
@@ -109,8 +110,6 @@ module Cms
           ["cms"]
         end
       end
-
     end
   end
 end
-

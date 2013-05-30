@@ -3,6 +3,10 @@
 <%= content_for :html_head do %>
 <%= stylesheet_link_tag("cms/content_library") %>
   <%= javascript_tag do %>
+
+    var cms_namespace = "<%= link_to("xxx", block_path(@block)).match(/href=\"\/([^\/]+)/)[1] %>";
+    //console.log("cms_namespace: " + cms_namespace);
+
     jQuery(function($){
       var collectionName = '<%= content_type.content_block_type %>'
       
@@ -17,16 +21,21 @@
         $(this).addClass('selected')
         $('#functions .button').addClass('disabled').attr('href','#')
         $('#functions .off span').css('color', '#FFFFFF')
-        $('#add_button').removeClass('disabled').attr('href', '/cms/'+collectionName+'/new')
-        $('#view_button').removeClass('disabled').attr('href', '/cms/'+collectionName+'/<%= @block.id %>/version/'+id)
+        $('#add_button').removeClass('disabled').attr('href', '/'+cms_namespace+'/'+collectionName+'/new')
+        $('#view_button').removeClass('disabled').attr('href', '/'+cms_namespace+'/'+collectionName+'/<%= @block.id %>/version/'+id)
         if($(this).find('.current').length > 0) {
           $('#view_button').attr('href', '/cms/'+collectionName+'/<%= @block.id %>')
-          $('#edit_button').removeClass('disabled').attr('href', '/cms/'+collectionName+'/<%= @block.id %>/edit')
+          $('#edit_button').removeClass('disabled').attr('href', '/'+cms_namespace+'/'+collectionName+'/<%= @block.id %>/edit')
         } else {
-          $('#revert_button').removeClass('disabled').attr('href', '/cms/'+collectionName+'/<%= @block.id %>/revert_to/'+id)
+          $('#revert_button').removeClass('disabled').attr('href', '/'+cms_namespace+'/'+collectionName+'/<%= @block.id %>/revert_to/'+id)
         }
       })
     })
+
+    /*
+:%s/\/cms\//\/bcms_my401k\//g
+:%s/\/bcms_my401k\//\/cms\//g
+    */
   <% end %>
 
 <% end %>

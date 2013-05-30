@@ -37,7 +37,7 @@ class Cms::FormBuilder < ActionView::Helpers::FormBuilder
   # These are the higher-level fields, 
   # that get wrapped in divs with labels, instructions, etc.
 
-  %w[date_picker datetime_select text_area text_field file_field].each do |f|
+  %w[date_picker datetime_select text_area number_field text_field file_field].each do |f|
     src = <<-end_src
       def cms_#{f}(method, options={})
         add_tabindex!(options)
@@ -126,18 +126,6 @@ class Cms::FormBuilder < ActionView::Helpers::FormBuilder
     set_default_value!(method, options)
     cms_options = options.extract_only!(:label, :instructions, :default_value)
     render_cms_form_partial :text_editor,
-                            :id => (options[:id] || "#{@object_name}_#{method}"),
-                            :editor_enabled => (cookies["editorEnabled"].blank? ? true : (cookies["editorEnabled"] == 'true' || cookies["editorEnabled"] == ['true'])),
-                            :object_name => @object_name, :method => method,
-                            :options => options, :cms_options => cms_options
-  end
-
-  # Renders a WYWIWYG rich text editor.
-  def cms_richtext_editor(method, options = {})
-    add_tabindex!(options)
-    set_default_value!(method, options)
-    cms_options = options.extract_only!(:label, :instructions, :default_value)
-    render_cms_form_partial :richtext_editor,
                             :id => (options[:id] || "#{@object_name}_#{method}"),
                             :editor_enabled => (cookies["editorEnabled"].blank? ? true : (cookies["editorEnabled"] == 'true' || cookies["editorEnabled"] == ['true'])),
                             :object_name => @object_name, :method => method,
