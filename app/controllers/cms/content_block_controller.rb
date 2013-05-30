@@ -153,7 +153,6 @@ module Cms
     end
 
     def block_path(block, action=nil)
-      #debugger
       path = []
       path << engine_for(block)
       path << action if action
